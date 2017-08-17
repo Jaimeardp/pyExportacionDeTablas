@@ -1,5 +1,3 @@
-
-
 import pymysql
 from pandas import DataFrame, Series
 import pandas as pd
@@ -47,22 +45,15 @@ class Connection(object):
         arr = open('nuevo.txt','w')
         for l in range(0,len(frame)):
             dic[l] = []
-            #arr.write(l)
-            #print(l)
-            #print(type(l))
-            #print(type(frame[l]))
-            #frame[l].shape()
-            #print(frame[l])
             for i in frame:
-        	    #for ser in frame[i]:
-                #  dic[l].append(ser[i][0])
-                #  break
                 dic[l].append(frame[i][l])
                 arr.write(str(frame[i][l])+',')
             arr.write('\n')
 
         return dic
-                
+
+    def json(self,nom):
+        pass
 
                   
 #?INDICES DEL FRAME NO UTILIZADO
