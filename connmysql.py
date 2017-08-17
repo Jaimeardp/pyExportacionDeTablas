@@ -1,7 +1,7 @@
 import pymysql
 from pandas import DataFrame, Series
 import pandas as pd
-import numpy
+import numpy as np
 import json
 class Connection(object):
     """docstring for Connection"""
@@ -47,26 +47,39 @@ class Connection(object):
                 dic[l].append(frame[i][l])
                 arr.write(str(frame[i][l])+',')
             arr.write('\n')
-
         return dic
 
-
     def json(self,nom):
+        listac = list()
         db = self._Con()
         cursor =  db.cursor()
         query = 'select * from '+nom
+        #---------------------------------
+        querycol = 'show columns from '+nom
+        cursor.execute(querycol)
+        cols = cursor.fetchall()
+        l1 = list(cols)
+        print(l1)
+        arr = np.array(l1)
+        arr = arr[0:len(l1),:1]
+        arr.shape = (len(l1),)
+        print(arr)
+        #listac.append(l1[0][0])
+        #listac.append(l1[1][0])
+        #----------------------------------
+        #print(listac)
+        #----------------------------------
         cursor.execute(query)
         results = cursor.fetchall()
         print(type(results))
         l = list(results)
-        frame = DataFrame(l)
+        frame = DataFrame(l,columns=arr)
         js = frame.to_json(orient="records")
         print(type(js))
-        print(js)
+        #print(js)
         data = json.loads(js)
         with open('nuevo1.json','w') as outfile:
             json.dump(data,outfile)
-
         return js
 
                   
@@ -76,14 +89,14 @@ class Connection(object):
 
 con = Connection('root','mysql','prestocash')
 
-con.mostrar_tbl('tb_estado_articulo')
+#con.mostrar_tbl('tb_estado_articulo')
 
 #di= con.txt('tb_cambio')
 
 #print(di)
 
-js = con.json('tb_estado_articulo')
-print(js)
+js = con.json('tb_cambio')
+#print(js)
 
 
 
