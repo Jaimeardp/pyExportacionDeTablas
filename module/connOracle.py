@@ -11,14 +11,14 @@ class ConnectionOracle(object):
     dbname = ''
 
     def __init__(self, dbusername,dbpassword,dbname):
-        super(Connection, self).__init__()
+        super(ConnectionOracle, self).__init__()
         self.dbusername = dbusername
         self.dbpassword = dbpassword
         self.dbname = dbname
 
     def _Con(self):
         cad = self.dbusername+'/'+self.dbpassword+'@127.0.0.1:1521/'
-        db = cx_Oracle.connect(cad+dbname)
+        db = cx_Oracle.connect(cad+self.dbname)
         #db = pymysql.connect(user = self.dbusername, passwd = self.dbpassword, db = self.dbname)
         return db
 
@@ -56,11 +56,9 @@ class ConnectionOracle(object):
         cursor =  db.cursor()
         query = 'select * from '+nom
         #---------------------------------
-        querycol = 'show columns from '+nom
-        cursor.execute(querycol)
+        cursor.execute("select column_name from all_tab_columns where table_name= '"+ nom +"' ")
         cols = cursor.fetchall()
         l1 = list(cols)
-        print(l1)
         arr = np.array(l1)
         arr = arr[0:len(l1),:1]
         arr.shape = (len(l1),)

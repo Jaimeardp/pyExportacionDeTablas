@@ -11,7 +11,7 @@ class ConnectionMySQL(object):
     dbname = ''
 
     def __init__(self, dbusername,dbpassword,dbname):
-        super(Connection, self).__init__()
+        super(ConnectionMySQL, self).__init__()
         self.dbusername = dbusername
         self.dbpassword = dbpassword
         self.dbname = dbname
