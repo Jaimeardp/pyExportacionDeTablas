@@ -25,7 +25,6 @@ class ConnectionMySQL(object):
         cursor = db.cursor()
         query = 'select * from '+nom
         cursor.execute(query)
-        # retrieve the result 
         results = cursor.fetchall()
         for li in results: 
           print(li,'\n')
@@ -80,10 +79,9 @@ class ConnectionMySQL(object):
 
     def csv(self):
         pass           
+
+
 #?INDICES DEL FRAME NO UTILIZADO
-
-#### MAIN ------------------------------
-
 
 
 
@@ -91,9 +89,7 @@ class ConnectionMySQL(object):
 
 #con.mostrar_tbl('tb_estado_articulo')
 
-#di= con.txt('tb_cambio')
-
-#print(di)
+#di= con.txt('tb_cambio') print(di)
 
 #js = con.json('tb_cambio')
 #print(js)
