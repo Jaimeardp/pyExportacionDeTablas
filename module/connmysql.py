@@ -87,7 +87,7 @@ class Connection(object):
 
 
 
-con = Connection('root','mysql','prestocash')
+#con = Connection('root','mysql','prestocash')
 
 #con.mostrar_tbl('tb_estado_articulo')
 
@@ -95,7 +95,7 @@ con = Connection('root','mysql','prestocash')
 
 #print(di)
 
-js = con.json('tb_cambio')
+#js = con.json('tb_cambio')
 #print(js)
 
 
