@@ -5,6 +5,7 @@ import argparse
 from connmysql import *
 
 global nomTabla
+global ptrDB
 
 ######### VIEW SHELL ###########################
 
@@ -19,8 +20,9 @@ class ViewTableWithFormat(object):
 
 
 ############## CONEXIONES A LAS DB'S ###############	
+# CREAR UN MODULO PROPIO PARA DISTINTAS DBS
 def registrarDB(dbuser,dbpass,dbname):
-	CON = Connection(dbuser,dbpass,dbname)
+	CON = ConnectionMySQL(dbuser,dbpass,dbname)
 	return CON
 
 

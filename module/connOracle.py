@@ -1,9 +1,9 @@
-import pymysql
+import cx_Oracle 
 from pandas import DataFrame, Series
 import pandas as pd
 import numpy as np
 import json
-class ConnectionMySQL(object):
+class ConnectionOracle(object):
     """docstring for Connection"""
 
     dbusername = ''
@@ -17,7 +17,9 @@ class ConnectionMySQL(object):
         self.dbname = dbname
 
     def _Con(self):
-        db = pymysql.connect(user = self.dbusername, passwd = self.dbpassword, db = self.dbname)
+        cad = self.dbusername+'/'+self.dbpassword+'@127.0.0.1:1521/'
+        db = cx_Oracle.connect(cad+dbname)
+        #db = pymysql.connect(user = self.dbusername, passwd = self.dbpassword, db = self.dbname)
         return db
 
     def mostrar_tbl(self ,nom):
@@ -25,7 +27,6 @@ class ConnectionMySQL(object):
         cursor = db.cursor()
         query = 'select * from '+nom
         cursor.execute(query)
-        # retrieve the result 
         results = cursor.fetchall()
         for li in results: 
           print(li,'\n')
@@ -63,7 +64,6 @@ class ConnectionMySQL(object):
         arr = np.array(l1)
         arr = arr[0:len(l1),:1]
         arr.shape = (len(l1),)
-        #print(arr)
         #----------------------------------
         cursor.execute(query)
         results = cursor.fetchall()
@@ -80,23 +80,9 @@ class ConnectionMySQL(object):
 
     def csv(self):
         pass           
+
+
 #?INDICES DEL FRAME NO UTILIZADO
-
-#### MAIN ------------------------------
-
-
-
-
-#con = Connection('root','mysql','prestocash')
-
-#con.mostrar_tbl('tb_estado_articulo')
-
-#di= con.txt('tb_cambio')
-
-#print(di)
-
-#js = con.json('tb_cambio')
-#print(js)
 
 
 
