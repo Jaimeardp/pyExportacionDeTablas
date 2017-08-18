@@ -19,7 +19,6 @@ class ConnectionOracle(object):
     def _Con(self):
         cad = self.dbusername+'/'+self.dbpassword+'@127.0.0.1:1521/'
         db = cx_Oracle.connect(cad+self.dbname)
-        #db = pymysql.connect(user = self.dbusername, passwd = self.dbpassword, db = self.dbname)
         return db
 
     def mostrar_tbl(self ,nom):
