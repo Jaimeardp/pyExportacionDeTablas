@@ -63,27 +63,27 @@ class Connection(object):
         arr = np.array(l1)
         arr = arr[0:len(l1),:1]
         arr.shape = (len(l1),)
-        print(arr)
-        #listac.append(l1[0][0])
-        #listac.append(l1[1][0])
-        #----------------------------------
-        #print(listac)
+        #print(arr)
         #----------------------------------
         cursor.execute(query)
         results = cursor.fetchall()
-        print(type(results))
+        #print(type(results))
         l = list(results)
         frame = DataFrame(l,columns=arr)
         js = frame.to_json(orient="records")
-        print(type(js))
+        #print(type(js))
         #print(js)
         data = json.loads(js)
         with open('nuevo1.json','w') as outfile:
             json.dump(data,outfile)
         return js
 
-                  
+    def csv(self):
+        pass           
 #?INDICES DEL FRAME NO UTILIZADO
+
+#### MAIN ------------------------------
+
 
 
 
