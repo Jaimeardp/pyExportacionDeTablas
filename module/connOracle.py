@@ -68,12 +68,14 @@ class ConnectionOracle(object):
         #print(type(results))
         l = list(results)
         frame = DataFrame(l,columns=arr)
-        js = frame.to_json(orient="records")
+        js = frame.to_json(orient="records") # JSON
         #print(type(js))
         #print(js)
-        data = json.loads(js)
+        data = json.loads(js) # DECODIFICADOR UN JSON
         with open('nuevo1.json','w') as outfile:
-            json.dump(data,outfile)
+            json.dump(data,outfile) # # CODIFICAR DE UNA CADENA A JSON 
+
+        print(type(js))
         return js
 
     def csv(self,nom):
@@ -98,9 +100,7 @@ class ConnectionOracle(object):
         frame = DataFrame(l,columns=arr)
         #frame.to_csv(path)
         with open('nuevo2.csv','w') as outfile:
-            csv = frame.to_csv('nuevo2.csv')    
-
-        return csv
+            frame.to_csv('nuevo2.csv')    
 
 #?INDICES DEL FRAME NO UTILIZADO
 

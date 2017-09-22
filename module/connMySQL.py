@@ -99,29 +99,8 @@ class ConnectionMySQL(object):
         #print(type(results))
         l = list(results)
         frame = DataFrame(l,columns=arr)
-        cs = frame.to_csv()
-        l1 = cs.split('\n')
-        #print(lista1)
-        la = list()
-        [la.append(l.split()) for l in l1]
-        #lista = list(cs)
-        #listm = list()
-        #listm.append([cad for cad in cs.split('\n')])
-        #print(listm)
-        #print(type(cs))
-        print(la)
-        #data = np.array(lista)
-        #print(data)
-        #np.savetxt("nuevo2.csv", delimiter=",")
-
-        #print(type(js))
-        #print(js)
-        #data = json.loads(js)
         with open('nuevo2.csv','w') as outfile:
-            writer = csv.writer(outfile)
-            writer.writerows(la)
-        return cs   
-
+            frame.to_csv('nuevo2.csv')  
 
 #?INDICES DEL FRAME NO UTILIZADO
 
