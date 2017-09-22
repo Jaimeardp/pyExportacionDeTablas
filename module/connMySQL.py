@@ -3,6 +3,7 @@ from pandas import DataFrame, Series
 import pandas as pd
 import numpy as np
 import json
+import csv
 class ConnectionMySQL(object):
     """docstring for Connection"""
 
@@ -77,8 +78,49 @@ class ConnectionMySQL(object):
             json.dump(data,outfile)
         return js
 
-    def csv(self):
-        pass           
+    def csv(self,nom):
+        listac = list()
+        db = self._Con()
+        cursor =  db.cursor()
+        query = 'select * from '+nom
+        #---------------------------------
+        querycol = 'show columns from '+nom
+        cursor.execute(querycol)
+        cols = cursor.fetchall()
+        l1 = list(cols)
+        print(l1)
+        arr = np.array(l1)
+        arr = arr[0:len(l1),:1]
+        arr.shape = (len(l1),)
+        #print(arr)
+        #----------------------------------
+        cursor.execute(query)
+        results = cursor.fetchall()
+        #print(type(results))
+        l = list(results)
+        frame = DataFrame(l,columns=arr)
+        cs = frame.to_csv()
+        l1 = cs.split('\n')
+        #print(lista1)
+        la = list()
+        [la.append(l.split()) for l in l1]
+        #lista = list(cs)
+        #listm = list()
+        #listm.append([cad for cad in cs.split('\n')])
+        #print(listm)
+        #print(type(cs))
+        print(la)
+        #data = np.array(lista)
+        #print(data)
+        #np.savetxt("nuevo2.csv", delimiter=",")
+
+        #print(type(js))
+        #print(js)
+        #data = json.loads(js)
+        with open('nuevo2.csv','w') as outfile:
+            writer = csv.writer(outfile)
+            writer.writerows(la)
+        return cs   
 
 
 #?INDICES DEL FRAME NO UTILIZADO

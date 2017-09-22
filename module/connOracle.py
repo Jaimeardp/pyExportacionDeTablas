@@ -50,6 +50,7 @@ class ConnectionOracle(object):
         return dic
 
     def json(self,nom):
+
         listac = list()
         db = self._Con()
         cursor =  db.cursor()
@@ -75,9 +76,31 @@ class ConnectionOracle(object):
             json.dump(data,outfile)
         return js
 
-    def csv(self):
-        pass           
+    def csv(self,nom):
+        #path="C:/Users/Jaime/Desktop/PYTHON/PythonMySQL/pyExportacionDeTablas/generated/prueba.csv"
+        listac = list()
+        db = self._Con()
+        cursor =  db.cursor()
+        query = 'select * from '+nom
+        #---------------------------------
+        cursor.execute("select column_name from all_tab_columns where table_name= '"+ nom +"' ")
+        cols = cursor.fetchall()
+        l1 = list(cols)
+        print (l1)
+        arr = np.array(l1)
+        arr = arr[0:len(l1),:1]
+        arr.shape = (len(l1),)
+        #----------------------------------
+        cursor.execute(query)
+        results = cursor.fetchall()
+        #print(type(results))
+        l = list(results)
+        frame = DataFrame(l,columns=arr)
+        #frame.to_csv(path)
+        with open('nuevo2.csv','w') as outfile:
+            csv = frame.to_csv('nuevo2.csv')    
 
+        return csv
 
 #?INDICES DEL FRAME NO UTILIZADO
 
